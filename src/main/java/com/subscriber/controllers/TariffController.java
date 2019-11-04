@@ -1,8 +1,5 @@
 package com.subscriber.controllers;
 
-import com.subscriber.models.Tariff;
-import com.subscriber.services.TariffService;
-import com.subscriber.utils.ResponseHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -15,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+
+import com.subscriber.models.Tariff;
+import com.subscriber.services.TariffService;
+import com.subscriber.utils.ResponseHelper;
 
 @RestController
 @RequestMapping(value = "/api/tariffs")

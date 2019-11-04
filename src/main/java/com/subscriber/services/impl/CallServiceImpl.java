@@ -1,17 +1,5 @@
 package com.subscriber.services.impl;
 
-import com.subscriber.entities.CallEntity;
-import com.subscriber.entities.SmsEntity;
-import com.subscriber.entities.SubscriberEntity;
-import com.subscriber.models.Balance;
-import com.subscriber.models.Call;
-import com.subscriber.models.Sms;
-import com.subscriber.repositories.CallRepository;
-import com.subscriber.repositories.SmsRepository;
-import com.subscriber.repositories.SubscriberRepository;
-import com.subscriber.services.CallService;
-import com.subscriber.services.SmsService;
-import com.subscriber.services.SubscriberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.ConversionService;
@@ -22,7 +10,13 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
+import com.subscriber.entities.CallEntity;
+import com.subscriber.entities.SubscriberEntity;
+import com.subscriber.models.Call;
+import com.subscriber.repositories.CallRepository;
+import com.subscriber.services.CallService;
+import com.subscriber.services.SubscriberService;
 
 @Service
 @Slf4j
@@ -41,7 +35,7 @@ public class CallServiceImpl implements CallService {
                 callRepository.findAllWithDateTimeAfter(LocalDateTime.now().minusDays(1), callerEntity.getId());
 
         short dayLimit = callerEntity.getTariff().getLimitDayCalls();
-        if (calls.size() > dayLimit) {
+        if (calls.size() >= dayLimit) {
             throw new ResponseStatusException(
                     HttpStatus.TOO_MANY_REQUESTS,
                     "You exceeded you limit on calls per day: " + dayLimit);

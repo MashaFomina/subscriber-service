@@ -14,9 +14,9 @@ public class MainController {
         return new RedirectView("/swagger-ui.html");
     }
 
-    @GetMapping(value = "/logout")
-    @ApiIgnore
-    public RedirectView showLogoutPageMock() {
-        return new RedirectView("/login");
-    }
+//    @GetMapping(value = "/logout")
+//    @ApiIgnore
+//    public RedirectView showLogoutPageMock() {
+//        return new RedirectView("/login");
+//    }
 }

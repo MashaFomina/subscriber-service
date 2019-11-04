@@ -1,7 +1,5 @@
 package com.subscriber.config;
 
-
-import com.subscriber.converters.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +9,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Arrays;
 import java.util.HashSet;
+
+import com.subscriber.converters.*;
 
 @Configuration
 @EnableScheduling

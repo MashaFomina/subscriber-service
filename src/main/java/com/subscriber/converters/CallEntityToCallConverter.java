@@ -1,16 +1,11 @@
 package com.subscriber.converters;
 
-import com.subscriber.entities.CallEntity;
-import com.subscriber.entities.SmsEntity;
-import com.subscriber.entities.SubscriberEntity;
-import com.subscriber.entities.TariffEntity;
-import com.subscriber.models.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.subscriber.entities.CallEntity;
+import com.subscriber.models.*;
 
 @Component
 @RequiredArgsConstructor

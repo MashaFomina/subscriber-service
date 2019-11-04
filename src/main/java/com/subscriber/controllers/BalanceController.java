@@ -1,8 +1,5 @@
 package com.subscriber.controllers;
 
-import com.subscriber.models.Balance;
-import com.subscriber.services.SubscriberService;
-import com.subscriber.utils.ResponseHelper;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -13,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.Optional;
+
+import com.subscriber.models.Balance;
+import com.subscriber.services.SubscriberService;
+import com.subscriber.utils.ResponseHelper;
 
 @RestController
 @RequestMapping(value = "/api/balance")
@@ -58,10 +59,10 @@ public class BalanceController {
             @ApiResponse(code = 404, response = String.class, message = "Subscriber not found")
     })
     public ResponseEntity<Balance> addMoney(
-            @ApiParam(name = "phone", value = "phone number", defaultValue = "+77770001122")
+            @ApiParam(name = "phone", value = "phone number")
             @NotEmpty @RequestParam(value = "phone", required = true) String phone,
-            @ApiParam(name = "money", value = "added money", defaultValue = "100")
-            @RequestParam(value = "money", defaultValue = "100") @Min(value = 0, message = "amount of money must be positive") float money) throws Exception {
+            @ApiParam(name = "money", value = "added money")
+            @RequestParam(value = "money") @Min(value = 0, message = "amount of money must be positive") float money) throws Exception {
         return ResponseHelper.getOkResponseWithBody(subscriberService.addMoney(phone, money));
     }
 }

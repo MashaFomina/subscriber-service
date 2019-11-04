@@ -1,8 +1,5 @@
 package com.subscriber.controllers;
 
-import com.subscriber.models.Subscriber;
-import com.subscriber.services.SubscriberService;
-import com.subscriber.utils.ResponseHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,6 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+
+import com.subscriber.models.Subscriber;
+import com.subscriber.services.SubscriberService;
+import com.subscriber.utils.ResponseHelper;
 
 @RestController
 @RequestMapping(value = "/api/subscribers")

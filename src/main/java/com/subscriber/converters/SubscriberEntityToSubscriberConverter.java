@@ -1,11 +1,12 @@
 package com.subscriber.converters;
 
-import com.subscriber.entities.SubscriberEntity;
-import com.subscriber.models.Subscriber;
-import com.subscriber.models.SubscriberBase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+
+import com.subscriber.entities.SubscriberEntity;
+import com.subscriber.models.Subscriber;
+import com.subscriber.models.SubscriberBase;
 
 @Component
 @RequiredArgsConstructor
