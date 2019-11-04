@@ -1,13 +1,13 @@
 package com.subscriber.models;
 
-import lombok.*;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @SuperBuilder
 @EqualsAndHashCode
-public class SubscriberBase implements Serializable {
+public class TariffBase implements Serializable {
     @NotEmpty
     private long id;
 
@@ -23,16 +23,16 @@ public class SubscriberBase implements Serializable {
     private String name;
 
     @NotEmpty
-    private String surname;
+    private float priceCall;
 
     @NotEmpty
-    private String password;
+    private float priceSms;
 
     @NotEmpty
-    private String phone;
+    private short limitDayCalls;
 
     @NotEmpty
-    private float balance;
+    private short oneSmsSize;
 
     @NotEmpty
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")

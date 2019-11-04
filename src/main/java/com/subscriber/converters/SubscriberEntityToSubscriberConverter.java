@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class SubscriberEntityToSubscriberConverter implements Converter<SubscriberEntity, Subscriber> {
 
-    private final TariffEntityToTariffConverter tariffEntityToTariffConverter;
+    private final TariffEntityToTariffBaseConverter tariffEntityToTariffBaseConverter;
 
     @Override
     public Subscriber convert(SubscriberEntity subscriberEntity) {
@@ -23,11 +23,12 @@ public class SubscriberEntityToSubscriberConverter implements Converter<Subscrib
                 .phone(subscriberEntity.getPhone())
                 .balance(subscriberEntity.getBalance())
                 .createdAt(subscriberEntity.getCreatedAt())
-                .tariff(tariffEntityToTariffConverter.convert(subscriberEntity.getTariff()))
+                .tariff(tariffEntityToTariffBaseConverter.convert(subscriberEntity.getTariff()))
                 .build();
     }
 
     public static SubscriberBase convertBase(SubscriberEntity subscriberEntity) {
+        if (subscriberEntity == null) return new SubscriberBase();
         return SubscriberBase.builder()
                 .id(subscriberEntity.getId())
                 .name(subscriberEntity.getName())

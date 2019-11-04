@@ -35,4 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
+
+//    @Value("${config.value}")
+//    private String configValue;
 }

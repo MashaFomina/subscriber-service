@@ -18,7 +18,7 @@ import java.util.List;
 public class Subscriber extends SubscriberBase implements Serializable {
     @NotEmpty
     @Builder.Default
-    private Tariff tariff = null;
+    private TariffBase tariff = null;
 }
 
 

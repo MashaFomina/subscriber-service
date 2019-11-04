@@ -8,16 +8,28 @@ import lombok.experimental.SuperBuilder;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @SuperBuilder
 @EqualsAndHashCode
-public class Tariff extends TariffBase implements Serializable {
+public class Call implements Serializable {
     @NotEmpty
-    @Builder.Default
-    private List<SubscriberBase> subscribers = new ArrayList();
+    private long id;
+
+    @NotEmpty
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
+    private LocalDateTime datetime;
+
+    @NotEmpty
+    private float duration;
+
+    @NotEmpty
+    private SubscriberBase caller;
+
+    private SubscriberBase receiver;
+
+    @NotEmpty
+    private String receiverPhone;
 }

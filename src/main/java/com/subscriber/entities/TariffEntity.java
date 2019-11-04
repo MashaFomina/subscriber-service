@@ -1,6 +1,7 @@
 package com.subscriber.entities;
 
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -37,10 +38,10 @@ public class TariffEntity {
     @Column(name = "one_sms_size", nullable = false)
     private short oneSmsSize;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy="tariff", fetch = FetchType.EAGER, cascade =
+    @OneToMany(mappedBy="tariff", fetch = FetchType.LAZY, cascade =
             {
                     CascadeType.DETACH,
                     CascadeType.MERGE,

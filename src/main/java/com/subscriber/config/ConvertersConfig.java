@@ -20,6 +20,8 @@ public class ConvertersConfig {
     private final SubscriberEntityToSubscriberConverter subscriberEntityToSubscriberConverter;
     private final SubscriberEntityToBalanceConverter subscriberEntityToBalanceConverter;
     private final TariffEntityToTariffConverter tariffEntityToTariffConverter;
+    private final CallEntityToCallConverter callEntityToCallConverter;
+    private final SmsEntityToSmsConverter smsEntityToSmsConverter;
 
     @Bean
     public ConversionService subscriberConversionService() {
@@ -27,7 +29,9 @@ public class ConvertersConfig {
         bean.setConverters(new HashSet<>(Arrays.asList(
                 subscriberEntityToSubscriberConverter,
                 subscriberEntityToBalanceConverter,
-                tariffEntityToTariffConverter
+                tariffEntityToTariffConverter,
+                callEntityToCallConverter,
+                smsEntityToSmsConverter
         )));
         bean.afterPropertiesSet();
         return bean.getObject();

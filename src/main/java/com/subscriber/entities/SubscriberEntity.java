@@ -37,7 +37,7 @@ public class SubscriberEntity {
     @ColumnDefault(value = "0")
     private float balance;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
     @ManyToOne

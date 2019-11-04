@@ -37,6 +37,28 @@ public class SubscriberServiceImpl implements SubscriberService {
     }
 
     @Override
+    public SubscriberEntity getSubscriberEntityByPhone(String phone) throws Exception {
+        Optional<SubscriberEntity> subscriber = subscriberRepository.findByPhone(phone.trim());
+        if (!subscriber.isPresent()) {
+            log.warn("Subscriber not found by phone number.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Subscriber not found by phone number.");
+        }
+        return subscriber.get();
+    }
+
+    @Override
+    public SubscriberEntity getSubscriberEntityByPhoneQuiet(String phone) throws Exception {
+        try {
+            return getSubscriberEntityByPhone(phone);
+        } catch (ResponseStatusException ex) {
+            if (!ex.getStatus().equals(HttpStatus.NOT_FOUND)) {
+                throw ex;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public Optional<Balance> getBalanceById(long id) {
         return Helper.execFunctionAndConvert(subscriberRepository::findById, id, subscriberConversionService, Balance.class);
     }
@@ -47,19 +69,32 @@ public class SubscriberServiceImpl implements SubscriberService {
     }
 
     @Override
-    public Balance addMoney(String phone, float money){
-        log.info("Start add money to " + phone + ": " + money);
-        Optional<SubscriberEntity> subscriber = subscriberRepository.findByPhone(phone);
-        if (!subscriber.isPresent()) {
-            log.warn("Subscriber not found by phone number.");
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Subscriber not found by phone number.");
-        }
+    public SubscriberEntity save(SubscriberEntity subscriber) throws Exception {
+        return subscriberRepository.save(subscriber);
+    }
 
-        SubscriberEntity subscriberEntity = subscriber.get();
-        subscriberEntity.setBalance(subscriberEntity.getBalance() + money);
-        subscriberEntity = subscriberRepository.save(subscriberEntity);
+    @Override
+    public SubscriberEntity changeBalance(SubscriberEntity subscriber, float money, boolean isAdding) throws Exception {
+        subscriber.setBalance(isAdding
+                ? (subscriber.getBalance() + money)
+                : (subscriber.getBalance() - money)
+        );
+        return subscriberRepository.save(subscriber);
+    }
+
+    @Override
+    public Balance addMoney(String phone, float money) throws Exception {
+        log.info("Start add money to " + phone + ": " + money);
+
+        SubscriberEntity subscriberEntity = getSubscriberEntityByPhone(phone);
+        subscriberEntity = changeBalance(subscriberEntity, money, true);
 
         log.info("The money ({}) added on balance of: {}", money, subscriberEntity.getId());
         return subscriberConversionService.convert(subscriberEntity, Balance.class);
+    }
+
+    @Override
+    public void deleteAll() {
+        subscriberRepository.deleteAll();
     }
 }

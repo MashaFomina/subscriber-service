@@ -54,6 +54,7 @@ public class BalanceController {
     @ApiOperation(value = "Add money to balance by phone number")
     @ApiResponses({
             @ApiResponse(code = 200, response = Balance.class, message = "A balance info"),
+            @ApiResponse(code = 400, response = String.class, message = "Invalid body of request"),
             @ApiResponse(code = 404, response = String.class, message = "Subscriber not found")
     })
     public ResponseEntity<Balance> addMoney(
